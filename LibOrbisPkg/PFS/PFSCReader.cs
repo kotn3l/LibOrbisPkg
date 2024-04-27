@@ -82,7 +82,7 @@ namespace LibOrbisPkg.PFS
                 using (var bufStream = new MemoryStream(sectorBuf))
                 using (var ds = new DeflateStream(bufStream, CompressionMode.Decompress))
                 {
-                    ds.Read(output, 0, hdr.BlockSz);
+                    ds.Read(output, 0, hdr.BlockSz); //broken randomly stops lmfao
                 }
             }
         }
