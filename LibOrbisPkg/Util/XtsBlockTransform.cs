@@ -19,22 +19,22 @@ namespace LibOrbisPkg.Util
         /// </summary>
         public XtsBlockTransform(byte[] dataKey, byte[] tweakKey)
         {
-            cipher = new AesManaged
+            cipher = Aes.Create();
             {
-                Mode = CipherMode.ECB,
-                KeySize = 128,
-                Key = dataKey,
-                Padding = PaddingMode.None,
-                BlockSize = 128,
-            };
-            tweakCipher = new AesManaged
+                cipher.Mode = CipherMode.ECB;
+                cipher.KeySize = 128;
+                cipher.Key = dataKey;
+                cipher.Padding = PaddingMode.None;
+                cipher.BlockSize = 128;
+            }
+            tweakCipher = Aes.Create();
             {
-                Mode = CipherMode.ECB,
-                KeySize = 128,
-                Key = tweakKey,
-                Padding = PaddingMode.None,
-                BlockSize = 128,
-            };
+                cipher.Mode = CipherMode.ECB;
+                cipher.KeySize = 128;
+                cipher.Key = tweakKey;
+                cipher.Padding = PaddingMode.None;
+                cipher.BlockSize = 128;
+            }
         }
 
         public void EncryptSector(byte[] sector, ulong sectorNum) => CryptSector(sector, sectorNum, true);
